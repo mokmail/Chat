@@ -254,7 +254,7 @@ endpoints:
       # For `apiKey` and `baseURL`, you can use environment variables that you define.
       # recommended environment variables:
       apiKey: '${OPENROUTER_KEY}'
-      baseURL: 'https://openrouter.ai/api/v1'
+      baseURL: 'https://huggingface.co/api/models/'
       models:
         default: ['meta-llama/llama-3-70b-instruct']
         fetch: true
