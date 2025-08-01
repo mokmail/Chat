@@ -9,7 +9,8 @@ services:
     depends_on:
       - mongodb
       - rag_api
-    image: ghcr.io/danny-avila/librechat-dev:latest
+    #image: ghcr.io/danny-avila/librechat-dev:latest
+    image: mokmail/bev_librechat:docker_mcp 
     restart: always
     user: "${UID}:${GID}"
     extra_hosts:
@@ -21,6 +22,7 @@ services:
       - RAG_PORT=${RAG_PORT:-8000}
       - RAG_API_URL=http://rag_api:${RAG_PORT:-8000}
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - type: bind
         source: ./.env
         target: /app/.env
