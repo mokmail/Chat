@@ -169,22 +169,16 @@ mcpServers:
       - '-i'
       - "mcp/sequentialthinking"
   lmemory:
-    command: 'docker'
+    command: 'uvx'
     args:
-      - 'run'
-      - '--rm'
-      - '-i'
-      - -v
-      - /lmemory/local/:/lmemory/local/
-      - "mcp/memory"
-  # deeSearch:
-  #   command: 'uv'
-  #   args:
-  #     - 'tool'
-  #     - 'run'
-  #     - 'deeSearch-mcp'
-  #   path: '/arxiv-paper-mcp'
-# Definition of custom endpoints
+      - 'basic-memory'
+      - 'mcp'
+  deepseek-mcp:
+    command: 'uvx'
+    path: '/deepseek-MCP-server'
+    args:
+      - 'server.py'
+    #Definition of custom endpoints
 endpoints:
   assistants:
     disableBuilder: false # Disable Assistants Builder Interface by setting to `true`
