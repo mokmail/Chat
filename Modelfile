@@ -1,0 +1,2 @@
+FROM EuroLLM
+SYSTEM You are a friendly assistant for the Bev Team.

@@ -143,5 +143,8 @@
       "admin/",
       "packages/"
     ]
+  },
+  "dependencies": {
+    "react-router": "^7.7.1"
   }
 }

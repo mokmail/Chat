@@ -173,12 +173,17 @@ mcpServers:
     args:
       - 'basic-memory'
       - 'mcp'
-  deepseek-mcp:
-    command: 'uvx'
-    path: '/deepseek-MCP-server'
+
+  Metadata:
+    command: 'docker'
+    
     args:
-      - 'server.py'
-    #Definition of custom endpoints
+      - 'run'
+      - '--rm'
+      - '-i'
+      - "mokmail/tool"
+  
+
 endpoints:
   assistants:
     disableBuilder: false # Disable Assistants Builder Interface by setting to `true`
@@ -188,9 +193,10 @@ endpoints:
     supportedIds: ["asst_supportedAssistantId1", "asst_supportedAssistantId2"]
     # excludedIds: ["asst_excludedAssistantId"]
     # Only show assistants that the user created or that were created externally (e.g. in Assistants playground).
-    # privateAssistants: false # Does not work with `supportedIds` or `excludedIds`
+    privateAssistants: false
     # (optional) Models that support retrieval, will default to latest known OpenAI models that support the feature
-    #retrievalModels: ["gpt-4-turbo-preview"]
+    retrievalModels:
+      - "gpt-4-turbo-preview"
     # (optional) Assistant Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
     capabilities: ["code_interpreter", "retrieval", "actions", "tools", "image_vision"]
   agents:
@@ -202,14 +208,14 @@ endpoints:
     disableBuilder: false
     # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
     capabilities:
-    - "execute_code"
-    - "file_search"
-    - "actions"
-    - "tools"
-    - "artifacts"
-    - "ocr"
-    - "chain"
-    - "web_search"
+      - "execute_code"
+      - "file_search"
+      - "actions"
+      - "tools"
+      - "artifacts"
+      - "ocr"
+      - "chain"
+      - "web_search"
     allowedProviders:
       # (optional) List of allowed providers for the model selection dropdown
       # If empty, all providers are allowed
@@ -417,4 +423,38 @@ endpoints:
 #           You are a helpful assistant specialized in European languages and tasks.
 #           Use the retrieval feature to access additional information.
 #           Please provide relevant context from the retrieved documents in your response.
-   
+# modelSpecs:
+#   enforce: true
+#   prioritize: true
+#   list:
+#     - name: "metadata generator"
+#       label: "Metadata Generator"
+#       default: true
+#       description: "The PDF Metadata Agent is an artificial intelligence-powered tool that extracts and organizes relevant information from a given PDF file. Utilizing advanced natural language processing (NLP) and computer vision techniques, the agent can automatically generate metadata"
+#       iconURL: "https://example.com/icon.png"
+#       preset:
+#         endpoint: "ollama"
+#         model: "llama3.2"
+#         maxContextTokens: 128000 # Maximum context tokens
+#         max_tokens: 4096 # Maximum output tokens
+#         temperature: 0.2
+#         modelLabel: "MetaData"
+#         greeting: |
+#           This agent extracts metadata from PDFs. To get started, simply upload the PDF file into this chat box
+#         promptPrefix: |
+#           Extract the following metadata from the PDF file provided below and return a JSON object with the keys exactly as listed. Use `null` for any missing values. Do **not** add any extra keys or text.
+#             use also the property of the pdf file to extract the metadata when applicable ['MetaData modified', 'Title' , 'Format' , 'creation']
+#             Metadata fields:
+#             - Metadata identifier : needs to be unique
+#             - Metadata modified : this is the last modification date of the file
+#             - Title
+#             - Description : short summarization of the content of the pdf file by max 300 charachters
+#             - Categories : a list of categories that best describe the content of the pdf file
+#             - Keywords : a list of keywords that best describe the content of the pdf file
+#             - Resource URL : the url of the pdf file if available otherwise  'XXXXXX'
+#             - Resource format: the format of the pdf file (e.g., PDF/A, PDF/X) 
+#             - Maintainer: name of the person or organization responsible for maintaining the PDF file
+#             - Publisher: BEV if not otherwise defined
+#             - Licence = Creative Commons Namensnennung 4.0 International (CC BY 4.0)  if not defined in the pdf file
+#             - Begin date : date of document creation 
+#               the output must be in JSON and match the Dublin Core Metadata Initiative
