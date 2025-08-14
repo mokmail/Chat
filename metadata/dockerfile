@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install the dependencies
-RUN pip install langchain-mcp-adapters pikepdf
+RUN pip install langchain-mcp-adapters pikepdf  pdfx
 
 # Copy the application code
 COPY . .
